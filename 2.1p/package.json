@@ -1,0 +1,36 @@
+
+{
+  "name": "sit725_2021-t2-prac",
+  "version": "1.0.0",
+  "description": "SIT725 Task 2.2P - Express Web Server and REST API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clivecorreya03/SIT725_225562551.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest-api",
+    "sit725",
+    "calculator",
+    "quotes"
+  ],
+  "author": "Clive Correya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clivecorreya03/SIT725_225562551/issues"
+  },
+  "homepage": "https://github.com/clivecorreya03/SIT725_225562551#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
