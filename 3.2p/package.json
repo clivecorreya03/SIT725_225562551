@@ -1,30 +1,21 @@
 {
-  "name": "SIT725_225562551",
-"version": "1.0.0",
-"description": "sit 725 week 3 prac",
-"main": "server.js",
-"scripts": {
-"start": "node server.js"
-},
-"repository": {
-"type": "git",
-"url": "https://github.com/clivecorreya03/SIT725_225562551.git"
-},
-"keywords": [
-"Nodejs",
-"Express",
-"Materialize",
-"HTML",
-"JS",
-"CSS"
-],
-"author": "Navit Choudhary",
-"license": "MIT",
-"bugs": {
-"url": "https://github.com/clivecorreya03/SIT725_225562551.git"
-},
-"homepage": "https://github.com/clivecorreya03/SIT725_225562551#readme",
-"dependencies": {
-"express": "^4.17.1"
-}
+    "name": "sit725-cybersecurity-dashboard",
+    "version": "1.0.0",
+    "description": "SIT725 Task 3.2P Cybersecurity Dashboard",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "keywords": [
+        "SIT725",
+        "Node.js",
+        "Express",
+        "Materialize",
+        "Cybersecurity"
+    ],
+    "author": "Clive",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.21.2"
+    }
 }
