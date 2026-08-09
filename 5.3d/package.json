@@ -1,0 +1,20 @@
+{
+  "name": "week5_3",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "seed": "node scripts/seed.js",
+    "validate": "node validation-tests.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "This project upgrades the Week 3 cybersecurity dashboard by integrating MongoDB and moving cybersecurity threat data to the Express server.",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1"
+  },
+  "keywords": [],
+  "type": "commonjs"
+}
