@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SIT725 Books Catalogue</title>
+
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+
+        h1 {
+            color: #222;
+        }
+
+
+        .instruction {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+
+        button {
+
+            background: #087c8c;
+            color: white;
+
+            border: none;
+
+            padding: 12px 20px;
+
+            font-size: 16px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            margin-bottom: 25px;
+        }
+
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+
+        #book-list {
+
+            margin-top: 10px;
+
+        }
+
+
+        .book-item {
+
+            background: #eeeeee;
+
+            padding: 14px;
+
+            margin-bottom: 8px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .book-item:hover {
+
+            background: #dddddd;
+
+        }
+
+
+        #book-details {
+
+            margin-top: 30px;
+
+            padding: 20px;
+
+            border-radius: 8px;
+
+            background: #f7f7f7;
+
+            display: none;
+        }
+
+
+        .detail-row {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .label {
+
+            font-weight: bold;
+
+        }
+
+
+        .error {
+
+            color: red;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>
+        Books Catalogue developed by s225562551
+    </h1>
+
+
+    <p class="instruction">
+        Click the button below to get all books from the server:
+    </p>
+
+
+    <button id="getBooksButton">
+        Get all books
+    </button>
+
+
+    <div id="book-list"></div>
+
+
+    <div id="book-details"></div>
+
+
+</div>
+
+
+
+<script>
+
+
+    const getBooksButton =
+        document.getElementById('getBooksButton');
+
+
+    const bookList =
+        document.getElementById('book-list');
+
+
+    const bookDetails =
+        document.getElementById('book-details');
+
+
+
+    // GET ALL BOOKS
+    getBooksButton.addEventListener('click', async () => {
+
+
+        try {
+
+
+            const response =
+                await fetch('/api/books');
+
+
+            const result =
+                await response.json();
+
+
+            bookList.innerHTML = '';
+
+            bookDetails.style.display = 'none';
+
+
+            result.data.forEach(book => {
+
+
+                const item =
+                    document.createElement('div');
+
+
+                item.className = 'book-item';
+
+
+                item.textContent =
+                    `${book.title} ${book.price} AUD`;
+
+
+                // Store book ID
+                item.dataset.id = book.id;
+
+
+                // Clicking book loads individual book
+                item.addEventListener('click', () => {
+
+                    loadBookDetails(book.id);
+
+                });
+
+
+                bookList.appendChild(item);
+
+
+            });
+
+
+        } catch (error) {
+
+
+            console.error(error);
+
+
+            bookList.innerHTML =
+                '<p class="error">Unable to load books.</p>';
+
+
+        }
+
+
+    });
+
+
+
+    // GET ONE BOOK
+    async function loadBookDetails(id) {
+
+
+        try {
+
+
+            const response =
+                await fetch(`/api/books/${id}`);
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+
+                bookDetails.style.display = 'block';
+
+
+                bookDetails.innerHTML =
+                    `<p class="error">${result.message}</p>`;
+
+
+                return;
+
+            }
+
+
+            const book = result.data;
+
+
+            bookDetails.innerHTML = `
+
+                <h2>Book Details</h2>
+
+                <div class="detail-row">
+                    <span class="label">Title:</span>
+                    ${book.title}
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Author:</span>
+                    ${book.author}
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Year:</span>
+                    ${book.year}
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Genre:</span>
+                    ${book.genre}
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Summary:</span>
+                    ${book.summary}
+                </div>
+
+                <div class="detail-row">
+                    <span class="label">Price (AUD):</span>
+                    ${book.price}
+                </div>
+
+            `;
+
+
+            bookDetails.style.display = 'block';
+
+
+        } catch (error) {
+
+
+            console.error(error);
+
+
+            bookDetails.style.display = 'block';
+
+
+            bookDetails.innerHTML =
+                '<p class="error">Unable to load book details.</p>';
+
+
+        }
+
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
